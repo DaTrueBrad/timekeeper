@@ -1,22 +1,31 @@
 
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
+import React, {useState, useEffect} from 'react'
 import './App.css';
 import Dashboard from './components/DashboardComponents/Dashboard';
-import Export from './components/DashboardComponents/Export';
-import Footer from './components/DashboardComponents/Footer';
-import Timekeeper from './components/DashboardComponents/Timekeeper';
-import User from './components/DashboardComponents/User';
-import Login from './components/Login';
+import Register from './components/LandingComponents/Register';
+import LandingPage from './components/LandingComponents/LandingPage';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
+  function setStatus() {
+    setIsLoggedIn(!isLoggedIn)
+  }
+  useEffect(() => {
+    if(localStorage.getItem('user')) {
+      setIsLoggedIn(true)
+    }
+  }, [])
+
   return (
     <div className="App">
       <Switch>
         <Route path="/dashboard">
-          <Dashboard />
+          <Dashboard isLoggedIn={setStatus} status={isLoggedIn}/>
         </Route>
         <Route path="/">
-          <Login />
+          {isLoggedIn ? <Redirect to='/dashboard/time/' /> : <LandingPage isLoggedIn={setStatus}/>}
         </Route>
       </Switch>
     </div>

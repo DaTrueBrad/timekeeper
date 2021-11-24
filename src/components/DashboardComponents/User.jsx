@@ -1,6 +1,7 @@
 import React from 'react'
 
 function User() {
+
   return (
     <div className="page-container">
       <h1>Hi, Miguel!</h1>
