@@ -20,7 +20,7 @@ function Login(props) {
         console.log(res)
         localStorage.setItem("user", res.data.id);
         localStorage.setItem("username", res.data.username);
-        localStorage.setItem("name", res.data.first_name);
+        localStorage.setItem("name", res.data.name);
         props.isLoggedIn()
       })
       .catch((err) => swal("Oops!", err.response.data));
